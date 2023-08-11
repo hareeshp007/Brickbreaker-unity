@@ -19,7 +19,7 @@ public class BallController : MonoBehaviour
     [SerializeField]
     private bool shootable=true;
     [SerializeField]
-    private float delayBetweenInstantiations = 0.2f;
+    private float delayBetweenInstantiations = 0.05f;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +45,11 @@ public class BallController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (count <= 0) { Debug.Log(count); }
-        //    if (!shootable) { checkballs(); }
+        if (!shootable)
+        {
+            checkBalls();
+        }
+        
 
     }
     /* public void checkballs()
@@ -93,6 +96,7 @@ public class BallController : MonoBehaviour
             GameObject newBall = Instantiate(ball, shotpoint.position, shotpoint.rotation);
             newBall.GetComponent<Rigidbody2D>().velocity = transform.up * launchForce;
             //Ballobjects.Add(newBall);
+            PlayerPrefs.SetInt("BallsonScene", PlayerPrefs.GetInt("BallsonScene") + 1);
             yield return new WaitForSeconds(delayBetweenInstantiations);
         }
         count = balls;
@@ -110,12 +114,9 @@ public class BallController : MonoBehaviour
     //when the shooted ball all have been destroyed reset the number of balls and reset the ball pos
     public void checkBalls()
     {
-        count++;
-        Debug.Log(count);
-        Debug.Log(balls);
-        if (count ==balls) { 
+        if (PlayerPrefs.GetInt("BallsonScene") == 0)
+        {
             Changeshootable();
-            count = 0;
         }
         
     }

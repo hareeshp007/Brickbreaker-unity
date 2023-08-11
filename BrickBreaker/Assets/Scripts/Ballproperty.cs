@@ -29,7 +29,8 @@ public class Ballproperty : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
-            controller.checkBalls();
+            PlayerPrefs.SetInt("BallsonScene", PlayerPrefs.GetInt("BallsonScene") - 1);
+            //controller.checkBalls();
             //ballcontroller.checkballs();
             Destroy(this.gameObject);
         }
