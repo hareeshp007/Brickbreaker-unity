@@ -6,7 +6,7 @@ public class Ballproperty : MonoBehaviour
 {
     public BallController controller;
 
-    public float destroyDelay = 10f; // Time delay before destroying
+    public float destroyDelay = 4f; // Time delay before destroying
     private float timer; // Timer to track the elapsed time
 
     private void Start()
@@ -20,6 +20,7 @@ public class Ballproperty : MonoBehaviour
 
         if (timer >= destroyDelay)
         {
+            PlayerPrefs.SetInt("BallsonScene", PlayerPrefs.GetInt("BallsonScene") - 1);
             Destroy(gameObject); // Destroy the GameObject if the delay is reached
         }
     }
